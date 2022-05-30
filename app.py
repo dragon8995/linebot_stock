@@ -126,28 +126,28 @@ def message(up, sign, tmpSign, upTime):
 
     if sign != 1 and sign != 5 and sign != 6:
         if tmpSign == 1:
-		line_bot_api.push_message(usr_id, TextSendMessage(text="多頭排列！快進場！準備大漲了！"))
-		# print("多頭排列！快進場！準備大漲了！")
+		    line_bot_api.push_message(usr_id, TextSendMessage(text="多頭排列！快進場！準備大漲了！"))
+		    # print("多頭排列！快進場！準備大漲了！")
 
         elif tmpSign == 6:
-		line_bot_api.push_message(usr_id, TextSendMessage(text="狀態不錯，準備進場！"))
-            	# print("狀態不錯，準備進場！")
+		    line_bot_api.push_message(usr_id, TextSendMessage(text="狀態不錯，準備進場！"))
+            # print("狀態不錯，準備進場！")
 
         elif tmpSign == 5:
-		line_bot_api.push_message(usr_id, TextSendMessage(text="強勢股阿！加碼了加碼了！"))
-            	# print("強勢股阿！加碼了加碼了！")
+		    line_bot_api.push_message(usr_id, TextSendMessage(text="強勢股阿！加碼了加碼了！"))
+        	# print("強勢股阿！加碼了加碼了！")
 
     else:
         if tmpSign == 2:
-		line_bot_api.push_message(usr_id, TextSendMessage(text="空頭排列！手上有股票的塊陶！"))
-            	# print("空頭排列！手上有股票的塊陶！")
+		    line_bot_api.push_message(usr_id, TextSendMessage(text="空頭排列！手上有股票的塊陶！"))
+        	# print("空頭排列！手上有股票的塊陶！")
 
         elif tmpSign == 3:
-		line_bot_api.push_message(usr_id, TextSendMessage(text="今天放空囉！"))
-            	# print("今天放空囉！")
+		    line_bot_api.push_message(usr_id, TextSendMessage(text="今天放空囉！"))
+        	# print("今天放空囉！")
 
         elif tmpSign == 4:
-		line_bot_api.push_message(usr_id, TextSendMessage(text="不想賠錢的趕快賣..."))
+		    line_bot_api.push_message(usr_id, TextSendMessage(text="不想賠錢的趕快賣..."))
            	# print("不想賠錢的趕快賣...")
 
     return upTime
