@@ -28,7 +28,7 @@ usr_id = 'Ub29322afc6722cd88bfe24c786320c7a'
 
 @app.route("/", methods=['GET'])
 def hello():
-	return 'OK'
+    return 'OK'
 
 
 @app.route("/callback", methods=['POST'])
@@ -120,35 +120,41 @@ def decision(latest_price, aver_5day_high, aver_5day_low, moving_average_20day, 
 # 發送訊息
 def message(up, sign, tmpSign, upTime):
     if up == True and upTime < 10:
-	    line_bot_api.push_message(usr_id, TextSendMessage(text="衝啊！今天就是做多的好日子啊"))
+        line_bot_api.push_message(
+            usr_id, TextSendMessage(text="衝啊！今天就是做多的好日子啊"))
         # print("衝啊！今天就是做多的好日子啊")
         upTime += 1
 
     if sign != 1 and sign != 5 and sign != 6:
         if tmpSign == 1:
-		    line_bot_api.push_message(usr_id, TextSendMessage(text="多頭排列！快進場！準備大漲了！"))
-		    # print("多頭排列！快進場！準備大漲了！")
+            line_bot_api.push_message(
+                usr_id, TextSendMessage(text="多頭排列！快進場！準備大漲了！"))
+            # print("多頭排列！快進場！準備大漲了！")
 
         elif tmpSign == 6:
-		    line_bot_api.push_message(usr_id, TextSendMessage(text="狀態不錯，準備進場！"))
+            line_bot_api.push_message(
+                usr_id, TextSendMessage(text="狀態不錯，準備進場！"))
             # print("狀態不錯，準備進場！")
 
         elif tmpSign == 5:
-		    line_bot_api.push_message(usr_id, TextSendMessage(text="強勢股阿！加碼了加碼了！"))
-        	# print("強勢股阿！加碼了加碼了！")
+            line_bot_api.push_message(
+                usr_id, TextSendMessage(text="強勢股阿！加碼了加碼了！"))
+            # print("強勢股阿！加碼了加碼了！")
 
     else:
         if tmpSign == 2:
-		    line_bot_api.push_message(usr_id, TextSendMessage(text="空頭排列！手上有股票的塊陶！"))
-        	# print("空頭排列！手上有股票的塊陶！")
+            line_bot_api.push_message(
+                usr_id, TextSendMessage(text="空頭排列！手上有股票的塊陶！"))
+            # print("空頭排列！手上有股票的塊陶！")
 
         elif tmpSign == 3:
-		    line_bot_api.push_message(usr_id, TextSendMessage(text="今天放空囉！"))
-        	# print("今天放空囉！")
+            line_bot_api.push_message(usr_id, TextSendMessage(text="今天放空囉！"))
+            # print("今天放空囉！")
 
         elif tmpSign == 4:
-		    line_bot_api.push_message(usr_id, TextSendMessage(text="不想賠錢的趕快賣..."))
-           	# print("不想賠錢的趕快賣...")
+            line_bot_api.push_message(
+                usr_id, TextSendMessage(text="不想賠錢的趕快賣..."))
+            # print("不想賠錢的趕快賣...")
 
     return upTime
 
