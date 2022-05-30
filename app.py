@@ -1,3 +1,7 @@
+import time
+import pandas
+import requests
+import twstock
 from cgitb import handler
 from typing import Text
 import os
@@ -15,10 +19,12 @@ app = Flask(__name__)
 line_bot_api = LineBotApi(
     'ywbkuyYgIVQGdHTuiHbtdn5tLmKWzhG5VFxvHXHxmLOElHvHxjxOhPeteqf9QaY5UkjTR1XUBZq2X6zof0uLTYktZME3wEoxJaPtrsn+PGhAst0YXk+ts88MFv6J9FlOr5XuB/Da5WBrNvXg7reR+gdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('5623f00a9894da7ed8bb303953a1fd2b')
-line_bot_api.push_message('Ub29322afc6722cd88bfe24c786320c7a' , TextSendMessage(text='開始測試'))
+line_bot_api.push_message(
+    'Ub29322afc6722cd88bfe24c786320c7a', TextSendMessage(text='開始測試'))
 usr_id = 'Ub29322afc6722cd88bfe24c786320c7a'
 # 回報串接
 # 監聽所有來自 /callback 的 Post Request
+
 
 @app.route("/", methods=['GET'])
 def hello():
@@ -42,8 +48,8 @@ def callback():
     return 'OK'
 
 
-#@handler.add(MessageEvent, message=TextMessage)
-#def echo(event):
+# @handler.add(MessageEvent, message=TextMessage)
+# def echo(event):
 
     # if event.source.user_id != "Ub29322afc6722cd88bfe24c786320c7a":
 #    line_bot_api.reply_message(
@@ -52,20 +58,15 @@ def callback():
 #    )
 
 
-
 # 主程式
 if __name__ == "__main__":
-    app.run(host='0.0.0.0',port=80)
+    app.run(host='0.0.0.0', port=80)
 
 ######################################
 ######以下為股票程式####################
 
 
 # 連接歷史
-import twstock
-import requests
-import pandas
-import time
 
 # 定義歷史價類別
 
@@ -119,35 +120,35 @@ def decision(latest_price, aver_5day_high, aver_5day_low, moving_average_20day, 
 # 發送訊息
 def message(up, sign, tmpSign, upTime):
     if up == True and upTime < 10:
-	line_bot_api.push_message(usr_id, TextSendMessage(text="衝啊！今天就是做多的好日子啊"))
-        #print("衝啊！今天就是做多的好日子啊")
+	    line_bot_api.push_message(usr_id, TextSendMessage(text="衝啊！今天就是做多的好日子啊"))
+        # print("衝啊！今天就是做多的好日子啊")
         upTime += 1
 
     if sign != 1 and sign != 5 and sign != 6:
         if tmpSign == 1:
 		line_bot_api.push_message(usr_id, TextSendMessage(text="多頭排列！快進場！準備大漲了！"))
-		#print("多頭排列！快進場！準備大漲了！")
+		# print("多頭排列！快進場！準備大漲了！")
 
         elif tmpSign == 6:
 		line_bot_api.push_message(usr_id, TextSendMessage(text="狀態不錯，準備進場！"))
-            	#print("狀態不錯，準備進場！")
+            	# print("狀態不錯，準備進場！")
 
         elif tmpSign == 5:
 		line_bot_api.push_message(usr_id, TextSendMessage(text="強勢股阿！加碼了加碼了！"))
-            	#print("強勢股阿！加碼了加碼了！")
+            	# print("強勢股阿！加碼了加碼了！")
 
     else:
         if tmpSign == 2:
 		line_bot_api.push_message(usr_id, TextSendMessage(text="空頭排列！手上有股票的塊陶！"))
-            	#print("空頭排列！手上有股票的塊陶！")
+            	# print("空頭排列！手上有股票的塊陶！")
 
         elif tmpSign == 3:
 		line_bot_api.push_message(usr_id, TextSendMessage(text="今天放空囉！"))
-            	#print("今天放空囉！")
+            	# print("今天放空囉！")
 
         elif tmpSign == 4:
 		line_bot_api.push_message(usr_id, TextSendMessage(text="不想賠錢的趕快賣..."))
-           	#print("不想賠錢的趕快賣...")
+           	# print("不想賠錢的趕快賣...")
 
     return upTime
 
