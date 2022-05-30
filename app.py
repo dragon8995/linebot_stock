@@ -20,6 +20,10 @@ handler = WebhookHandler('5623f00a9894da7ed8bb303953a1fd2b')
 # 回報串接
 # 監聽所有來自 /callback 的 Post Request
 
+@app.route("/", methods=['GET'])
+def hello():
+	return 'OK'
+
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -50,4 +54,4 @@ def echo(event):
 
 # 主程式
 if __name__ == "__main__":
-    app.run()
+    app.run(host='0.0.0.0',port=80)
