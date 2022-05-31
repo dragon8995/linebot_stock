@@ -19,8 +19,8 @@ app = Flask(__name__)
 line_bot_api = LineBotApi(
     'ywbkuyYgIVQGdHTuiHbtdn5tLmKWzhG5VFxvHXHxmLOElHvHxjxOhPeteqf9QaY5UkjTR1XUBZq2X6zof0uLTYktZME3wEoxJaPtrsn+PGhAst0YXk+ts88MFv6J9FlOr5XuB/Da5WBrNvXg7reR+gdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('5623f00a9894da7ed8bb303953a1fd2b')
-# line_bot_api.push_message(
-#    'Ub29322afc6722cd88bfe24c786320c7a', TextSendMessage(text='開始測試'))
+line_bot_api.push_message(
+    'Ub29322afc6722cd88bfe24c786320c7a', TextSendMessage(text='開始測試'))
 usr_id = 'Ub29322afc6722cd88bfe24c786320c7a'
 # 回報串接
 # 監聽所有來自 /callback 的 Post Request
@@ -210,7 +210,7 @@ while True:
     close = q[-1]
 
     # 輸出更新價格(測試用，正式上線可以拿掉)
-    line_bot_api.push_message(usr_id, TextSendMessage(text=close))
+    #line_bot_api.push_message(usr_id, TextSendMessage(text=close))
     # print(close)
 
     # 不是空價才執行
@@ -253,5 +253,6 @@ while True:
     time.sleep(10)
 
 # 主程式
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=80)
