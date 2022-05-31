@@ -214,7 +214,8 @@ while True:
     close = q[-1]
 
     # 輸出更新價格(測試用，正式上線可以拿掉)
-    print(close)
+    line_bot_api.push_message(usr_id, TextSendMessage(text=close))
+    ＃print(close)
 
     # 不是空價才執行
     if close != '-':
