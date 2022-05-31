@@ -54,11 +54,6 @@ def callback():
 def linePushMessage(msg):
     line_bot_api.push_message(usr_id, TextSendMessage(text=msg))
 
-
-# 主程式
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=80)
-
 ######################################
 ######以下為股票程式####################
 
@@ -253,6 +248,10 @@ while True:
             upTime = message(up, sign, tmpSign, upTime)
 
             sign = tmpSign
-            linePushMessage("^^")
+            linePushMessage("")
 
     time.sleep(10)
+
+# 主程式
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=80)
