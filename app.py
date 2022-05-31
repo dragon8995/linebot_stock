@@ -188,7 +188,7 @@ priceLst_num = 0
 
 
 # 匯入歷史價格
-historicalData = historical_data('1907')
+historicalData = historical_data('6235')
 
 # 計算歷史均價
 moving_average_5day = sum(historicalData.price[-5:])/5
@@ -200,7 +200,7 @@ aver_5day_low = sum(historicalData.low)/5
 while True:
 
     # 取得現價
-    url = "https://mis.twse.com.tw/stock/api/getStockInfo.jsp?ex_ch=tse_1907.tw&json=1&delay=0&_=1653874012981"
+    url = "https://mis.twse.com.tw/stock/api/getStockInfo.jsp?ex_ch=tse_6235.tw&json=1&delay=0&_=1653874012981"
     req = requests.get(url)
     data = req.json()
     close = data["msgArray"][0]["z"]
