@@ -217,7 +217,7 @@ while True:
     # print(close)
 
     # 不是空價才執行
-    if close != '-':
+    if close != 'None':
 
         # 把格式轉成float
         latest_price = float(close)
