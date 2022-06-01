@@ -114,7 +114,7 @@ def decision(latest_price, aver_5day_high, aver_5day_low, moving_average_20day, 
 # 發送訊息
 def message(up, sign, tmpSign, upTime):
     if up == True and upTime < 10:
-        linePushMessage(f"[{stock_id}]衝啊！今天就是做多的好日子啊")
+        linePushMessage(f"衝啊！今天就是做多[{stock_id}]的好日子啊")
         # print("衝啊！今天就是做多的好日子啊")
         upTime += 1
 
