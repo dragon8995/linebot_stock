@@ -20,7 +20,7 @@ line_bot_api = LineBotApi(
     'ywbkuyYgIVQGdHTuiHbtdn5tLmKWzhG5VFxvHXHxmLOElHvHxjxOhPeteqf9QaY5UkjTR1XUBZq2X6zof0uLTYktZME3wEoxJaPtrsn+PGhAst0YXk+ts88MFv6J9FlOr5XuB/Da5WBrNvXg7reR+gdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('5623f00a9894da7ed8bb303953a1fd2b')
 line_bot_api.push_message(
-    'Ub29322afc6722cd88bfe24c786320c7a', TextSendMessage(text='開始測試2603'))
+    'Ub29322afc6722cd88bfe24c786320c7a', TextSendMessage(text='開始測試2497'))
 usr_id = 'Ub29322afc6722cd88bfe24c786320c7a'
 # 回報串接
 # 監聽所有來自 /callback 的 Post Request
@@ -184,7 +184,7 @@ priceLst_num = 0
 
 
 # 匯入歷史價格
-historicalData = historical_data('2603')
+historicalData = historical_data('2497')
 
 # 計算歷史均價
 moving_average_5day = sum(historicalData.price[-5:])/5
@@ -202,7 +202,7 @@ while True:
     #close = data["msgArray"][0]["z"]
 
     # Yahoo現價
-    res = requests.get('https://tw.stock.yahoo.com/_td-stock/api/resource/FinanceChartService.ApacLibraCharts;symbols=%5B%222603.TW%22%5D;type=tick?bkt=%5B%22tw-qsp-exp-no2-1%22%2C%22test-es-module-production%22%2C%22test-portfolio-stream%22%5D&device=desktop&ecma=modern&feature=ecmaModern%2CshowPortfolioStream&intl=tw&lang=zh-Hant-TW&partner=none&prid=2h3pnulg7tklc&region=TW&site=finance&tz=Asia%2FTaipei&ver=1.2.902&returnMeta=true')
+    res = requests.get('https://tw.stock.yahoo.com/_td-stock/api/resource/FinanceChartService.ApacLibraCharts;symbols=%5B%222497.TW%22%5D;type=tick?bkt=%5B%22tw-qsp-exp-no2-1%22%2C%22test-es-module-production%22%2C%22test-portfolio-stream%22%5D&device=desktop&ecma=modern&feature=ecmaModern%2CshowPortfolioStream&intl=tw&lang=zh-Hant-TW&partner=none&prid=2h3pnulg7tklc&region=TW&site=finance&tz=Asia%2FTaipei&ver=1.2.902&returnMeta=true')
 
     jd = res.json()['data']
     q = jd[0]['chart']['indicators']['quote'][0]['close']
