@@ -114,42 +114,42 @@ def decision(latest_price, aver_5day_high, aver_5day_low, moving_average_20day, 
 # 發送訊息
 def message(up, sign, tmpSign, upTime):
     if up == True and upTime < 10:
-        linePushMessage("衝啊！今天就是做多的好日子啊")
+        linePushMessage(f"[{stock_id}]衝啊！今天就是做多的好日子啊")
         # print("衝啊！今天就是做多的好日子啊")
         upTime += 1
 
     if sign != 1 and sign != 5 and sign != 6:
         if tmpSign == 1:
-            linePushMessage("多頭排列！快進場！準備大漲了！")
+            linePushMessage(f"[{stock_id}]多頭排列！快進場！準備大漲了！")
             #line_bot_api.push_message(usr_id, TextSendMessage(text="多頭排列！快進場！準備大漲了！"))
             # print("多頭排列！快進場！準備大漲了！")
 
         elif tmpSign == 6:
-            linePushMessage("狀態不錯，準備進場！")
+            linePushMessage(f"[{stock_id}]狀態不錯，準備進場！")
             # line_bot_api.push_message(
             #    usr_id, TextSendMessage(text="狀態不錯，準備進場！"))
             # print("狀態不錯，準備進場！")
 
         elif tmpSign == 5:
-            linePushMessage("狀態不錯，準備進場！")
+            linePushMessage(f"[{stock_id}]狀態不錯，準備進場！")
             # line_bot_api.push_message(
             #    usr_id, TextSendMessage(text="強勢股阿！加碼了加碼了！"))
             # print("強勢股阿！加碼了加碼了！")
 
     else:
         if tmpSign == 2:
-            linePushMessage("空頭排列！手上有股票的塊陶！")
+            linePushMessage(f"[{stock_id}]空頭排列！手上有股票的塊陶！")
             # line_bot_api.push_message(
             #    usr_id, TextSendMessage(text="空頭排列！手上有股票的塊陶！"))
             # print("空頭排列！手上有股票的塊陶！")
 
         elif tmpSign == 3:
-            linePushMessage("今天放空囉！")
+            linePushMessage(f"[{stock_id}]今天放空囉！")
             #line_bot_api.push_message(usr_id, TextSendMessage(text="今天放空囉！"))
             # print("今天放空囉！")
 
         elif tmpSign == 4:
-            linePushMessage("不想賠錢的趕快賣...")
+            linePushMessage(f"不想賠錢的趕快賣[{stock_id}]...")
             # line_bot_api.push_message(
             #    usr_id, TextSendMessage(text="不想賠錢的趕快賣..."))
             # print("不想賠錢的趕快賣...")
