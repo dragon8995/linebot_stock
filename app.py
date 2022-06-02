@@ -17,7 +17,7 @@ from linebot.models import *
 app = Flask(__name__)
 
 # 股票id
-stock_id = '2497'
+stock_id = '2731'
 
 line_bot_api = LineBotApi(
     'ywbkuyYgIVQGdHTuiHbtdn5tLmKWzhG5VFxvHXHxmLOElHvHxjxOhPeteqf9QaY5UkjTR1XUBZq2X6zof0uLTYktZME3wEoxJaPtrsn+PGhAst0YXk+ts88MFv6J9FlOr5XuB/Da5WBrNvXg7reR+gdB04t89/1O/w1cDnyilFU=')
