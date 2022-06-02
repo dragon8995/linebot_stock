@@ -76,21 +76,13 @@ class historical_data:
 # 判定並回傳目前行情狀態
 
 
-def decision(latest_price, aver_5day_high, aver_5day_low, moving_average_20day, moving_average_5day, moving_average_5min, moving_average_10min, moving_average_20min, tick3_average_5):
+def decision(latest_price, aver_5day_high, aver_5day_low, moving_average_20day, moving_average_5day, moving_average_5min, moving_average_10min, tick3_average_5):
 
     up = False
     sign = 0
 
     if latest_price > aver_5day_high:
         up = True
-
-    if moving_average_5min > moving_average_10min and moving_average_10min > moving_average_20min:
-        sign = 1
-        return(up, sign)
-
-    if moving_average_5min < moving_average_10min and moving_average_10min < moving_average_20min:
-        sign = 2
-        return(up, sign)
 
     if latest_price <= moving_average_20day:
         if latest_price <= aver_5day_low:
@@ -100,66 +92,53 @@ def decision(latest_price, aver_5day_high, aver_5day_low, moving_average_20day, 
             sign = 4
             return(up, sign)
     else:
-        if latest_price > moving_average_5day:
+        if latest_price > moving_average_5day and moving_average_5day > moving_average_20day:
             if latest_price > tick3_average_5:
-                sign = 5
-                return(up, sign)
+                if moving_average_5min > moving_average_10min:
+                    sign = 1
+                    return(up, sign)
+
             else:
-                sign = 6
-                return(up, sign)
+                if latest_price > moving_average_10min:
+                    sign = 2
+                    return(up, sign)
+
+        elif latest_price < moving_average_5day:
+            sign = 5
+            return(up, sign)
 
     return(up, sign)
 
 
 # 發送訊息
 def message(up, sign, tmpSign, upTime):
-    if up == True and upTime < 10:
+
+    if up == True and upTime < 3:
         linePushMessage(f"衝啊！今天就是做多[{stock_id}]的好日子啊")
-        # print("衝啊！今天就是做多的好日子啊")
         upTime += 1
 
-    if sign != 1 and sign != 5 and sign != 6:
-        if tmpSign == 1:
-            linePushMessage(f"[{stock_id}]多頭排列！快進場！準備大漲了！")
-            #line_bot_api.push_message(usr_id, TextSendMessage(text="多頭排列！快進場！準備大漲了！"))
-            # print("多頭排列！快進場！準備大漲了！")
+    if tmpSign == 1 and sign != 1:
+        linePushMessage(f"[{stock_id}]盤中極強勢！建議進場買入！")
 
-        elif tmpSign == 6:
-            linePushMessage(f"[{stock_id}]狀態不錯，準備進場！")
-            # line_bot_api.push_message(
-            #    usr_id, TextSendMessage(text="狀態不錯，準備進場！"))
-            # print("狀態不錯，準備進場！")
+    elif tmpSign == 2 and sign != 2 and sign != 3 and sign != 4 and sign != 5:
+        linePushMessage(f"警告！[{stock_id}]盤中轉弱！")
 
-        elif tmpSign == 5:
-            linePushMessage(f"[{stock_id}]狀態不錯，準備進場！")
-            # line_bot_api.push_message(
-            #    usr_id, TextSendMessage(text="強勢股阿！加碼了加碼了！"))
-            # print("強勢股阿！加碼了加碼了！")
+    elif tmpSign == 3 and sign != 3:
+        linePushMessage(f"[{stock_id}]快點賣出停損！")
 
-    else:
-        if tmpSign == 2:
-            linePushMessage(f"[{stock_id}]空頭排列！手上有股票的塊陶！")
-            # line_bot_api.push_message(
-            #    usr_id, TextSendMessage(text="空頭排列！手上有股票的塊陶！"))
-            # print("空頭排列！手上有股票的塊陶！")
+    elif tmpSign == 4 and sign != 3 and sign != 4:
+        linePushMessage(f"[{stock_id}]該停損了")
 
-        elif tmpSign == 3:
-            linePushMessage(f"[{stock_id}]今天放空囉！")
-            #line_bot_api.push_message(usr_id, TextSendMessage(text="今天放空囉！"))
-            # print("今天放空囉！")
-
-        elif tmpSign == 4:
-            linePushMessage(f"不想賠錢的趕快賣[{stock_id}]...")
-            # line_bot_api.push_message(
-            #    usr_id, TextSendMessage(text="不想賠錢的趕快賣..."))
-            # print("不想賠錢的趕快賣...")
+    elif tmpSign == 5 and sign != 5 and sign != 3 and sign != 4:
+        linePushMessage(f"[{stock_id}]表現弱勢！")
 
     return upTime
 
 
 # 一連串的變數初始化
-sign = None
-tmpSign = None
+sign = None    # last signal be send
+tmpSign = None  # from function decision
+
 up = None
 upTime = 0
 
@@ -172,7 +151,7 @@ moving_average_5day = None
 close = None
 latest_price = None
 
-moving_average_20min = None
+
 moving_average_10min = None
 moving_average_5min = None
 
@@ -220,10 +199,10 @@ while True:
     if close != None:
 
         # 把格式轉成float
-        latest_price = float(close)
+        latest_price = close
 
         # 更新priceLst_num(更新前須檢查priceLst_num是否已累積20筆)
-        if priceLst_num >= 20:
+        if priceLst_num >= 10:
             priceLst.pop(0)
             priceLst.append(latest_price)
         else:
@@ -239,21 +218,21 @@ while True:
                 average_5_Lst.pop(0)
                 average_5_Lst.append(moving_average_5min)
 
-        # priceLst_num已累積20筆
-        if priceLst_num >= 20:
-            moving_average_20min = sum(priceLst)/20
+        # priceLst_num已累積10筆
+        if priceLst_num >= 10:
+
             moving_average_10min = sum(priceLst[-10:])/10
             tick3_average_5 = sum(average_5_Lst)/3
 
             up, tmpSign = decision(latest_price, aver_5day_high, aver_5day_low, moving_average_20day,
-                                   moving_average_5day, moving_average_5min, moving_average_10min, moving_average_20min, tick3_average_5)
+                                   moving_average_5day, moving_average_5min, moving_average_10min, tick3_average_5)
 
             upTime = message(up, sign, tmpSign, upTime)
 
-            sign = tmpSign
-            # linePushMessage("")
+            if tmpSign != 0:
+                sign = tmpSign
 
-    time.sleep(10)
+    time.sleep(60)
 
 # 主程式
 
