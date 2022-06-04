@@ -20,10 +20,10 @@ app = Flask(__name__)
 stock_id = '2731'
 
 line_bot_api = LineBotApi(
-    'ywbkuyYgIVQGdHTuiHbtdn5tLmKWzhG5VFxvHXHxmLOElHvHxjxOhPeteqf9QaY5UkjTR1XUBZq2X6zof0uLTYktZME3wEoxJaPtrsn+PGhAst0YXk+ts88MFv6J9FlOr5XuB/Da5WBrNvXg7reR+gdB04t89/1O/w1cDnyilFU=')
-handler = WebhookHandler('5623f00a9894da7ed8bb303953a1fd2b')
+    '你的Channel access token')
+handler = WebhookHandler('你的channel secret')
 line_bot_api.broadcast(TextSendMessage(text=f'開始測試{stock_id}'))
-usr_id = 'Ub29322afc6722cd88bfe24c786320c7a'
+usr_id = '你的id'
 # 回報串接
 # 監聽所有來自 /callback 的 Post Request
 
